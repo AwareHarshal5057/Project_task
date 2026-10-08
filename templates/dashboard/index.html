@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Visualizations by it's eggless</title>
+    <link href="https://fonts.cdnfonts.com/css/euclid-circular-a" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Euclid Circular A', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .chart-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            border: 2px solid transparent;
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(121, 60, 145, 0.15);
+            border-color: #793C91;
+            background: white;
+        }
+
+        .chart-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #793C91, #A29BD3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%) rotate(45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .chart-card:hover .chart-icon::before {
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        .chart-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        .chart-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .chart-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .charts-grid {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       
+        <div class="charts-grid">
+            <a href="{% url 'bar' %}" class="chart-card">
+                <div class="chart-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="12" width="4" height="9" rx="1"/>
+                        <rect x="10" y="5" width="4" height="16" rx="1"/>
+                        <rect x="17" y="8" width="4" height="13" rx="1"/>
+                    </svg>
+                </div>
+                <h3 class="chart-title">Bar Chart</h3>
+                <p class="chart-description">Performance Annual Efficiency visualization with target vs achievement comparison</p>
+            </a>
+
+            <a href="{% url 'wave' %}" class="chart-card">
+                <div class="chart-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2 12 Q 6 4, 12 12 T 22 12" stroke="white" stroke-width="2" fill="none"/>
+                        <circle cx="6" cy="8" r="1.5" fill="white"/>
+                        <circle cx="12" cy="12" r="1.5" fill="white"/>
+                        <circle cx="18" cy="8" r="1.5" fill="white"/>
+                    </svg>
+                </div>
+                <h3 class="chart-title">Wave Chart</h3>
+                <p class="chart-description">Smooth wave visualization showing percentage values with gradient fill</p>
+            </a>
+
+            <a href="{% url 'heatmap' %}" class="chart-card">
+                <div class="chart-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="4" height="4" rx="0.5" fill="white" opacity="0.8"/>
+                        <rect x="10" y="3" width="4" height="4" rx="0.5" fill="white"/>
+                        <rect x="17" y="3" width="4" height="4" rx="0.5" fill="white" opacity="0.6"/>
+                        <rect x="3" y="10" width="4" height="4" rx="0.5" fill="white" opacity="0.6"/>
+                        <rect x="10" y="10" width="4" height="4" rx="0.5" fill="white" opacity="0.8"/>
+                        <rect x="17" y="10" width="4" height="4" rx="0.5" fill="white"/>
+                        <rect x="3" y="17" width="4" height="4" rx="0.5" fill="white"/>
+                        <rect x="10" y="17" width="4" height="4" rx="0.5" fill="white" opacity="0.6"/>
+                        <rect x="17" y="17" width="4" height="4" rx="0.5" fill="white" opacity="0.8"/>
+                    </svg>
+                </div>
+                <h3 class="chart-title">Heatmap Chart</h3>
+                <p class="chart-description">Daily efficiency performance visualization with color-coded data matrix</p>
+            </a>
+
+            <a href="{% url 'line' %}" class="chart-card" style="">
+                <div class="chart-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 17 L8 12 L13 15 L21 7" stroke="white" stroke-width="2" fill="none"/>
+                        <circle cx="3" cy="17" r="2" fill="white"/>
+                        <circle cx="8" cy="12" r="2" fill="white"/>
+                        <circle cx="13" cy="15" r="2" fill="white"/>
+                        <circle cx="21" cy="7" r="2" fill="white"/>
+                    </svg>
+                </div>
+                <h3 class="chart-title">Line Chart</h3>
+                <p class="chart-description">Trend analysis and data progression visualization - Coming Soon</p>
+            </a>
+        </div>
+
+      
+    </div>
+</body>
+</html>

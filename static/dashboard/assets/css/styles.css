@@ -1,0 +1,736 @@
+body {
+    margin: 0;
+    padding: 10px;
+    background: white;
+    font-family: 'Euclid Circular A', Arial, sans-serif;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+p{
+    margin:0;
+    padding:0;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px;
+    box-sizing: border-box;
+    background: transparent;
+    /* border:1px solid #eee; */
+    transform: translateZ(0); /* Force hardware acceleration */
+    -webkit-transform: translateZ(0);
+    /* Optimize text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding:20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.header span {
+    font-size: 16px;
+    flex: 1;
+    text-align: left;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-button {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.action-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.action-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.accordion {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.accordion-content-wrapper {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.title-text {
+    font-size: 16px;
+    color: #333;
+}
+
+.description-text {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    align-self: stretch;
+    margin-top: 0;
+}
+
+.accordion-icon {
+    width: 30x;
+    height: 30px;
+    transition: transform 0.2s ease;
+}
+
+.accordion.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.good-pill {
+    background: #28a745;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hours-indicator {
+    color: #28a745;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent wrapping of text and triangle */
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.accordion.active .accordion-content {
+    max-height: 2000px; /* Increased to prevent cutoff */
+}
+
+.accordion-body {
+    padding: 20px;
+}
+
+.legend-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Square legend style for bar chart */
+.legend-color-square {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: none;
+}
+
+/* Special style for line legend with border */
+.legend-color-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #999;
+}
+
+.legend-text {
+    color: #666;
+    font-size: 16px;
+    font-family: 'Euclid Circular A', Arial, sans-serif;
+    font-weight: 400;
+}
+
+.chart-wrapper {
+    position: relative;
+    margin-top: 10px;
+    padding: 10px 0 10px 0;
+    height: 500px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    will-change: scroll-position; /* Optimize for scrolling */
+
+}
+
+.chart-scroll-container {
+    min-width: 800px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0); /* Force hardware acceleration */
+    backface-visibility: hidden; /* Prevent flickering */
+
+}
+
+.chart-scroll-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+canvas {
+    display: block;
+    max-width: 100%;
+    height: 100%;
+    padding-top: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0); /* Force hardware acceleration */
+    backface-visibility: hidden; /* Prevent flickering */
+    -webkit-backface-visibility: hidden;
+    /* Optimize canvas rendering for sharp, anti-aliased graphics */
+    image-rendering: auto; /* Let browser choose best rendering */
+    image-rendering: optimizeQuality; /* Fallback for older browsers */
+    image-rendering: -webkit-optimize-contrast; /* Chrome/Safari */
+    will-change: transform; /* Optimize for transforms */
+}
+
+/* Additional optimization for high DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    canvas {
+        image-rendering: auto;
+        image-rendering: optimizeQuality;
+    }
+}
+
+/* Desktop only - show pointer cursor when hovering over chart */
+@media (min-width: 768px) {
+    canvas {
+        cursor: crosshair;
+        /* Force high-quality rendering on desktop */
+        image-rendering: auto !important;
+        image-rendering: optimizeQuality !important;
+        -webkit-font-smoothing: subpixel-antialiased;
+        transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+    }
+    
+    /* Ensure sharp rendering for chart container on desktop */
+    .chart-scroll-container {
+        transform: translate3d(0, 0, 0);
+        will-change: transform;
+    }
+}
+
+.hours-label,
+.business-cycle {
+    position: absolute;
+    background: #f5f5f5;
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: #808080;
+    font-size: 14px;
+    font-family: 'Euclid Circular A', Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.hours-label {
+    transform: rotate(-90deg);
+    transform-origin: center;
+    z-index: 10;
+}
+
+.chart-description {
+    padding: 0;
+    color: #808080;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.data-availability-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.warning-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    padding:0 0 0 20px;
+}
+
+.notice-text {
+    color: #e53e3e;
+    font-size: 16px;
+    line-height: 1.4;
+    flex: 1;
+
+}
+
+.description-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.description-content p {
+    margin: 0;
+    flex: 1;
+}
+
+.powered-by {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.powered-icon {
+    height: 40px;
+    width: auto;
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    .header span {
+        font-size: 14px;
+        
+    }
+    .hours-label,
+    .business-cycle {
+        font-size: 10px !important;
+        padding:2px 8px;
+    }
+    .business-cycle {
+        top: 383.4px !important;
+    }
+    .action-button {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+    .accordion-icon {
+        width: 32px;
+        height: 32px;
+    }
+    .accordion-header {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+    .accordion-body {
+        font-size: 12px;
+        padding: 15px 0;
+    }
+    .good-pill {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+    .hours-indicator {
+        font-size: 13px;
+    }
+    .legend-text {
+        font-size: 12px;
+    }
+    .chart-description {
+        font-size: 12px;
+        padding: 12px 0;
+    }
+    .description-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .data-availability-notice {
+        align-items: flex-start;
+    }
+    .powered-by {
+        align-self: flex-start;
+        margin: 0;
+        padding: 0;
+    }
+    .powered-icon {
+        height: 25px;
+    }
+    .notice-text {
+        font-size: 12px;
+    }
+    .chart-wrapper {
+        padding: 5px 2px 20px 2px;
+        height: 400px; /* Increased from 380px to accommodate bubbles */
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Large mobile devices and small tablets */
+@media (min-width: 481px) and (max-width: 767px) {
+
+    .header span {
+        font-size: 17px;
+    }
+    .hours-label,
+    .business-cycle {
+        font-size: 10px !important;
+        padding:2px 8px;
+    }
+    .legend-container {
+        gap: 15px;
+    }
+    .chart-wrapper {
+        padding: 10px 10px 30px 10px;
+        height: 450px; /* Increased from 430px to accommodate bubbles */
+        -webkit-overflow-scrolling: touch;
+    }
+    .data-availability-notice {
+        align-items: flex-start;
+    }
+    .powered-by {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .header span {
+        font-size: 19px;
+    }
+    .legend-container {
+        gap: 25px;
+    }
+    .chart-wrapper {
+        padding: 25px 50px 40px 40px;
+        height: 400px;
+    }
+}
+
+
+
+/* Chat bubble hover styles */
+.chart-bubble {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.chart-container:hover .chart-bubble {
+    opacity: 1;
+}
+
+/* Purple bold text for percentage in bubbles */
+.bubble-percentage {
+    color: #793C91;
+    font-weight: bold;
+    opacity: 0.75;
+}
+
+/* Horizontal scrolling styles */
+.chart-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: #ddd #f5f5f5;
+}
+
+.chart-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.chart-wrapper::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.chart-wrapper::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.chart-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #bbb;
+}
+
+/* Data table styling for the simple two-column format */
+.data-table-container {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+#heatmapDataTable {
+    width: 100%;
+    font-family: 'Euclid Circular A', Arial, sans-serif;
+    background: transparent;
+}
+
+/* Heatmap specific styles */
+.heatmap-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#heatmapChart {
+    width: 100%;
+    overflow-x: auto;
+}
+
+#heatmapChart > div {
+    width: 100%;
+}
+
+/* Monthly summary grid styles */
+.monthly-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.month-summary-card {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: white;
+}
+
+/* Heatmap cell hover effects */
+.heatmap-cell {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Tooltip styles */
+.heatmap-tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-family: 'Euclid Circular A', Arial, sans-serif;
+}
+
+/* Monthly summary styles */
+.monthly-summary {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Euclid Circular A', Arial, sans-serif;
+}
+
+.monthly-summary h3 {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.month-summary-item {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.month-summary-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.month-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.stat-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.stat-text {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+/* Responsive styles for heatmap */
+@media (max-width: 768px) {
+    .heatmap-container {
+        padding: 10px;
+    }
+    
+    .monthly-summary-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heatmap-container {
+        padding: 5px;
+    }
+    
+    .monthly-summary {
+        padding: 15px;
+    }
+    
+    .monthly-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .month-name {
+        font-size: 14px;
+    }
+    
+    .stat-text {
+        font-size: 12px;
+    }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .data-table-container {
+        padding: 0 15px;
+    }
+    
+    #heatmapDataTable > div {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+    
+    #heatmapDataTable > div > div > div {
+        margin-bottom: 20px !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:first-child {
+        font-size: 15px !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:last-child {
+        gap: 12px !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:last-child > div {
+        gap: 5px !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:last-child > div > span {
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-table-container {
+        padding: 0 10px;
+    }
+    
+    #heatmapDataTable > div > div > div > div:first-child {
+        font-size: 14px !important;
+        margin-bottom: 6px !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:last-child {
+        gap: 10px !important;
+        flex-wrap: wrap !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:last-child > div {
+        gap: 4px !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:last-child > div > span {
+        font-size: 12px !important;
+    }
+    
+    #heatmapDataTable > div > div > div > div:last-child > div > div {
+        width: 6px !important;
+        height: 6px !important;
+    }
+}

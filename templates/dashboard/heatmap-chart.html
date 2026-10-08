@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance on Daily Efficiency Chart</title>
+    <link href="https://fonts.cdnfonts.com/css/euclid-circular-a" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/styles.css' %}">
+    <style>
+        /* Additional styles for the new heatmap */
+        .heatmap-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .heatmap-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        .heatmap-main {
+            flex: 2;
+            min-width: 800px;
+            overflow-x: auto;
+        }
+        
+        .heatmap-summary {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        @media (max-width: 1200px) {
+            .heatmap-wrapper {
+                flex-direction: column;
+            }
+            
+            .heatmap-main {
+                min-width: 100%;
+            }
+            
+            .heatmap-summary {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .heatmap-container {
+                padding: 10px;
+            }
+            
+            /* Mobile table styles */
+            .monthly-summary-tables {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .monthly-summary-tables table {
+                min-width: 300px;
+            }
+            
+            .monthly-summary-tables td {
+                padding: 8px !important;
+                font-size: 12px !important;
+            }
+            
+            /* Change to vertical layout on mobile */
+            .summary-cell-content {
+                flex-direction: column !important;
+                gap: 4px !important;
+            }
+            
+            .summary-text {
+                text-align: center;
+                font-size: 11px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <!-- Accordion Section -->
+         <div class="accordion" id="chartAccordion">
+            <div class="accordion-header">
+                <div class="accordion-content-wrapper">
+                    <div class="title-row">
+                        <span class="good-pill">Good</span>
+                        <span class="title-text">Performance on Daily Efficiency (%)</span>
+                        <span class="hours-indicator">100 % ▲</span>
+                    </div>
+                    <p class="description-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <button class="toggle-button" onclick="toggleAccordion()">
+                  <img src="{% static 'dashboard/assets/icons/chevron.svg' %}" alt="chevron" class="accordion-icon">
+                </button>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-body"> 
+                    
+                    <div class="header">
+                        <span>Razika Khatoon’s Performance on Daily Efficiency (%)</span>
+                        <div class="action-buttons">
+                            <button class="action-button">
+                             <img src="{% static 'dashboard/assets/icons/download.svg' %}" alt="download" class="action-icon">
+                            </button>
+                            <button class="action-button">
+                              <img src="{% static 'dashboard/assets/icons/email.svg' %}" alt="email" class="action-icon">
+                            </button>
+                            <button class="action-button">
+                               <img src="{% static 'dashboard/assets/icons/chat.svg' %}" alt="chat" class="action-icon">
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="heatmap-container">
+                        <div id="heatmapChart"></div>
+                    </div>
+
+                    <!-- Chart Description Text -->
+                    <div class="chart-description">
+                        <div class="data-availability-notice">
+                           <img src="{% static 'dashboard/assets/icons/warning.svg' %}" alt="warning" class="warning-icon">
+                            <span class="notice-text">Dec 24, Jan 25, Feb 25 , Dec 24, Jan 25, Feb 25, Dec 24, Jan 25, Feb 25, Feb 25 data not available</span>
+                            <div class="powered-by">
+                               <img src="{% static 'dashboard/assets/icons/powered.svg' %}" alt="Powered by Gen AI" class="powered-icon">
+                            </div>
+                        </div>
+                        <div class="description-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Accordion toggle function
+        function toggleAccordion() {
+            const accordion = document.getElementById('chartAccordion');
+            accordion.classList.toggle('active');
+        }
+    </script>
+  <script src="{% static 'dashboard/assets/js/heatmap-chart.js' %}?v=2.1"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTD Productivity Line Chart</title>
+    <!-- Chart.js v3.9.1 - Better anti-aliasing support -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- ChartJS Plugin DataLabels v2.2.0 - Compatible with Chart.js v3+ -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <link href="https://fonts.cdnfonts.com/css/euclid-circular-a" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/styles.css' %}">
+</head>
+<body>
+
+
+    
+    <div class="chart-container">
+         Accordion Section 
+         <div class="accordion" id="chartAccordion3">
+            <div class="accordion-header">
+                <div class="accordion-content-wrapper">
+                    <div class="title-row">
+                        <span class="good-pill">Good</span>
+                        <span class="title-text">MTD Productivity (#Cases) of Arijit Sinha's Team</span>
+                    </div>
+                    <p class="description-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+               <button class="toggle-button" onclick="toggleAccordion3()">
+                   <img src="{% static 'dashboard/assets/icons/chevron.svg' %}"
+                     alt="chevron"
+                     class="accordion-icon">
+                </button>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-body"> 
+                    
+
+        <div class="header">
+    <span>MTD Productivity (#Cases) of Arijit Sinha's Team</span>
+
+    <div class="action-buttons">
+
+        <button class="action-button" type="button">
+            <img src="{% static 'dashboard/assets/icons/download.svg' %}"
+                 alt="download"
+                 class="action-icon">
+        </button>
+
+        <button class="action-button" type="button">
+            <img src="{% static 'dashboard/assets/icons/email.svg' %}"
+                 alt="email"
+                 class="action-icon">
+        </button>
+
+        <button class="action-button" type="button">
+            <img src="{% static 'dashboard/assets/icons/chat.svg' %}"
+                 alt="chat"
+                 class="action-icon">
+        </button>
+
+    </div>
+</div>
+        <div class="chart-and-legend-container">
+            <div class="chart-wrapper">
+                <div class="chart-scroll-container">
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <!-- Debug info -->
+                <div id="chart-debug3" style="display: none; color: red; padding: 10px; margin-top: 10px;"></div>
+            </div>
+            
+            <div class="legend-sidebar">
+                <div class="toggle-legend-item interactive-legend" data-dataset="0">
+                    <div class="toggle-switch" data-color="#4A90E2">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Aditi Singh</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="1">
+                    <div class="toggle-switch" data-color="#7B68EE">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Saumya Nanda</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="2">
+                    <div class="toggle-switch" data-color="#50E3C2">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Prakhar Aggarwal</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="3">
+                    <div class="toggle-switch" data-color="#BD10E0">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Shreya Kumari</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="4">
+                    <div class="toggle-switch" data-color="#FF6B6B">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Ananya Gupta</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="5">
+                    <div class="toggle-switch" data-color="#4ECDC4">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Aarya Singh</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="6">
+                    <div class="toggle-switch" data-color="#45B7D1">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Akanksha Gupta</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="7">
+                    <div class="toggle-switch" data-color="#96CEB4">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Raj Nandini</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="8">
+                    <div class="toggle-switch" data-color="#F5A623">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Rishav Poddar</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="9">
+                    <div class="toggle-switch" data-color="#DDA0DD">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Sunil Verma</span>
+                </div>
+                <div class="toggle-legend-item interactive-legend" data-dataset="10">
+                    <div class="toggle-switch" data-color="#E94B3C">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-legend-text">Kajal Kumari</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Description Text -->
+        <div class="chart-description">
+            <div class="data-availability-notice"> 
+              <img src="{% static 'dashboard/assets/icons/warning.svg' %}" alt="warning" class="warning-icon">
+                <span class="notice-text">Dec 24, Jan 25, Feb 25 ; Dec 24, Jan 25, Feb 25, Dec 24, Jan 25, Feb 25, Feb 25 data not available</span>
+                <div class="powered-by">
+                 <img src="{% static 'dashboard/assets/icons/powered.svg' %}"
+                    alt="Powered by Gen AI"
+                    class="powered-icon">
+                </div>
+            </div>
+             <div class="description-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div> 
+        </div>
+    </div>
+</div>
+</div>
+    </div>
+
+     <script>
+    // Accordion toggle function
+    function toggleAccordion3() {
+        const accordion = document.getElementById('chartAccordion3');
+        accordion.classList.toggle('active');
+    }
+
+    // Debug: Check if libraries are loaded
+    window.addEventListener('load', function() {
+        const debugDiv = document.getElementById('chart-debug3');
+
+        if (!window.Chart) {
+            debugDiv.style.display = 'block';
+            debugDiv.innerHTML = 'Error: Chart.js library failed to load';
+        }
+
+        if (!window.ChartDataLabels) {
+            console.warn('ChartDataLabels plugin not loaded, but chart may still work');
+        }
+    });
+</script>
+
+<script src="{% static 'dashboard/assets/js/line-chart.js' %}?v=2.0"></script>
+</body>
+</html>

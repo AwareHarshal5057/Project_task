@@ -1,0 +1,104 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Chart Visualization</title>
+    <!-- Chart.js v3.9.1 - Better anti-aliasing support -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- ChartJS Plugin DataLabels v2.2.0 - Compatible with Chart.js v3+ -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <link href="https://fonts.cdnfonts.com/css/euclid-circular-a" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/styles.css' %}">
+</head>
+<body>
+    <div class="chart-container">
+        <!-- Accordion Section -->
+        <div class="accordion" id="chartAccordion2">
+            <div class="accordion-header">
+                <div class="accordion-content-wrapper">
+                    <div class="title-row">
+                        <span class="good-pill">Good</span>
+                        <span class="title-text">Overall Accuracy (%)</span>
+                        <span class="hours-indicator">20.1% ▲</span>
+                    </div>
+                    <p class="description-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <button class="toggle-button" onclick="toggleAccordion2()">
+                   <img src="{% static 'dashboard/assets/icons/chevron.svg' %}"
+                        alt="chevron"
+                        class="accordion-icon" >
+                </button>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-body">
+                    
+                 
+
+        <div class="header">
+            <span>Razika Khatoon's Overall Accuracy (%)</span>
+            <div class="action-buttons">
+                <button class="action-button">
+                   <img src="{% static 'dashboard/assets/icons/download.svg' %}" alt="download" class="action-icon">
+                </button>
+                <button class="action-button">
+                  <img src="{% static 'dashboard/assets/icons/email.svg' %}" alt="email" class="action-icon">
+                </button>
+                <button class="action-button">
+                  <img src="{% static 'dashboard/assets/icons/chat.svg' %}" alt="chat" class="action-icon">
+                </button>
+            </div>
+        </div>
+
+        <!-- Legend removed as requested -->
+        <div class="chart-wrapper">
+            <div class="chart-scroll-container">
+                <canvas id="efficiencyChart2"></canvas>
+            </div>
+            <!-- Debug info -->
+            <div id="chart-debug2" style="display: none; color: red; padding: 10px; margin-top: 10px;"></div>
+        </div>
+
+        <!-- Chart Description Text -->
+        <div class="chart-description">
+            <div class="data-availability-notice">
+              <img src="{% static 'dashboard/assets/icons/warning.svg' %}" alt="warning" class="warning-icon">
+                <span class="notice-text">Dec 24, Jan 25, Feb 25 ; Dec 24, Jan 25, Feb 25, Dec 24, Jan 25, Feb 25, Feb 25 data not available</span>
+                <div class="powered-by">
+                   <img src="{% static 'dashboard/assets/icons/powered.svg' %}" alt="Powered by Gen AI" class="powered-icon">
+                </div>
+            </div>
+            <div class="description-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    </div>
+
+    <script>
+        // Accordion toggle function
+        function toggleAccordion2() {
+            const accordion = document.getElementById('chartAccordion2');
+            accordion.classList.toggle('active');
+        }
+        
+        // Debug: Check if libraries are loaded
+        window.addEventListener('load', function() {
+            const debugDiv = document.getElementById('chart-debug2');
+            if (!window.Chart) {
+                debugDiv.style.display = 'block';
+                debugDiv.innerHTML = 'Error: Chart.js library failed to load';
+            }
+            if (!window.ChartDataLabels) {
+                console.warn('ChartDataLabels plugin not loaded, but chart may still work');
+            }
+        });
+    </script>
+    <script src="{% static 'dashboard/assets/js/wave-chart.js' %}?v=1.1"></script>
+</body>
+</html>

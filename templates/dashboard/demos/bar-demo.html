@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Annual Efficiency Chart</title>
+    <!-- Chart.js v3.9.1 - Better anti-aliasing support -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- ChartJS Plugin DataLabels v2.2.0 - Compatible with Chart.js v3+ -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <link href="https://fonts.cdnfonts.com/css/euclid-circular-a" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=4.3">
+</head>
+<body>
+    <div class="chart-container">
+        <!-- Accordion Section -->
+        <!-- <div class="accordion" id="chartAccordion">
+            <div class="accordion-header">
+                <div class="accordion-content-wrapper">
+                    <div class="title-row">
+                        <span class="good-pill">Good</span>
+                        <span class="title-text">Performance on MTD Efficiency (Hours)</span>
+                        <span class="hours-indicator">80Hrs ▲</span>
+                    </div>
+                    <p class="description-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <button class="toggle-button" onclick="toggleAccordion()">
+                    <img src="../assets/icons/chevron.svg" alt="chevron" class="accordion-icon">
+                </button>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-body"> -->
+                    
+               
+
+        <div class="header">
+            <span>Razika Khatoon's Performance Annual Efficiency (Hours)</span>
+            <!-- <div class="action-buttons">
+                <button class="action-button">
+                    <img src="../assets/icons/download.svg" alt="download" class="action-icon">
+                </button>
+                <button class="action-button">
+                    <img src="../assets/icons/email.svg" alt="email" class="action-icon">
+                </button>
+                <button class="action-button">
+                    <img src="../assets/icons/chat.svg" alt="chat" class="action-icon">
+                </button>
+            </div> -->
+        </div>
+
+        <div class="legend-container">
+            <div class="legend-item">
+                <div class="legend-color legend-color-square" style="background-color: #A29BD3;"></div>
+                <span class="legend-text">Target</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-color-square" style="background-color: #793C91;"></div>
+                <span class="legend-text">Achievement</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-color-square legend-color-line" style="background-color: transparent;">
+                    <div style="background-color: #009245; height: 2px; width: 100%;"></div>
+                </div>
+                <span class="legend-text">ACH%</span>
+            </div>
+        </div>
+        <div class="chart-wrapper">
+            <div class="chart-scroll-container">
+                <canvas id="efficiencyChart"></canvas>
+            </div>
+            <!-- Debug info -->
+            <div id="chart-debug" style="display: none; color: red; padding: 10px; margin-top: 10px;"></div>
+        </div>
+
+        <!-- Chart Description Text -->
+        <!-- <div class="chart-description">
+            <div class="data-availability-notice">
+                <img src="../assets/icons/warning.svg" alt="warning" class="warning-icon">
+                <span class="notice-text">Dec 24, Jan 25, Feb 25 ; Dec 24, Jan 25, Feb 25, Dec 24, Jan 25, Feb 25, Feb 25 data not available</span>
+                <div class="powered-by">
+                    <img src="../assets/icons/powered.svg" alt="Powered by Gen AI" class="powered-icon">
+                </div>
+            </div>
+            <div class="description-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div> -->
+    </div>
+</div>
+</div>
+    </div>
+
+    <!-- <script>
+        // Accordion toggle function
+        function toggleAccordion() {
+            const accordion = document.getElementById('chartAccordion');
+            accordion.classList.toggle('active');
+        }
+        
+        // Debug: Check if libraries are loaded
+        window.addEventListener('load', function() {
+            const debugDiv = document.getElementById('chart-debug');
+            if (!window.Chart) {
+                debugDiv.style.display = 'block';
+                debugDiv.innerHTML = 'Error: Chart.js library failed to load';
+            }
+            if (!window.ChartDataLabels) {
+                console.warn('ChartDataLabels plugin not loaded, but chart may still work');
+            }
+        }); -->
+    </script>
+    <script src="../assets/js/bar-chart.js"></script>
+</body>
+</html>
