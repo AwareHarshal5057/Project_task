@@ -9,6 +9,7 @@ urlpatterns = [
     path('heatmap',views.heatmap,name='heatmap'),
     path('line',views.line,name='line'),
 
+    path("generate-pdf/", views.generate_pdf, name="generate_pdf"),
 ]
 
 
